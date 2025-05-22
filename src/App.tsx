@@ -4,13 +4,15 @@ import { Home, Settings, User, MessageSquare, Share2, ThumbsUp, Star, LucideProp
 
 interface MenuItem {
   id: string;
-  icon: React.FC<LucideProps>; // Ensure this matches the type expected by DraggableRadialMenu
+  icon: React.FC<LucideProps>;
   label: string;
   description?: string;
   action?: () => void;
 }
 
 const App: React.FC = () => {
+  console.warn('APP_COMPONENT_RENDERING_NOW_12345');
+
   const menuItems: MenuItem[] = [
     { id: 'home', icon: Home, label: 'Home', description: "Go to Home Page", action: () => console.log('Home clicked') },
     { id: 'settings', icon: Settings, label: 'Settings', description: "Adjust Application Settings", action: () => console.log('Settings clicked') },
@@ -22,8 +24,7 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-700 flex flex-col items-center justify-center text-white relative overflow-hidden">
-      {/* Background Grid Pattern */}
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 to-slate-700 flex flex-col items-center justify-center text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full opacity-10">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -43,16 +44,16 @@ const App: React.FC = () => {
         <h1 className="text-4xl font-bold mb-2">Draggable Radial Menu</h1>
         <p className="text-lg text-slate-300">Click the button to open the menu, then drag it around!</p>
         <p className="text-sm text-slate-400 mt-2">Hover over items to see them enlarge and show descriptions.</p>
-        <p className="text-sm text-slate-400 mt-2">Now with dynamic radius adjustment to prevent icon overlap!</p>
+        <p className="text-sm text-slate-400 mt-2">Dynamic radius adjustment prevents icon overlap near edges.</p>
       </div>
       
       <DraggableRadialMenu 
         items={menuItems} 
-        orbitRadius={120} // This is now the initial/minimum radius
+        orbitRadius={120} 
         itemSize={48} 
         mainButtonSize={64}
         itemIconSize={24}
-        hoverScale={2} // Items scale up to 2x on hover
+        hoverScale={1.8} 
       />
 
       <footer className="absolute bottom-4 text-center w-full text-slate-400 text-sm z-10">
